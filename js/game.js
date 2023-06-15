@@ -6,6 +6,7 @@ class scrambledGame {
     this.difficulty = "Easy";
     this.value = this.difficulty;
     this.score = 0;
+    this.lives = 5;
     this.hint = "Some Hint";
     this.gameIsOver = false;
     this.words = new Words();
@@ -15,7 +16,9 @@ class scrambledGame {
     this.greenCheck = document.querySelector(".green");
     this.redCheck = document.querySelector(".red");
     this.currentScore = document.getElementById("score");
+    this.endScreen = document.getElementById("end-screen");
     this.seenWords = [];
+    this.gamePlay = document.querySelector(".game-play");
     // this.originalWord = document.querySelector(".original-word");
     // this.easyWord = this.getEasyWord;
     // this.hardWord = this.gethHardWord;
@@ -61,23 +64,35 @@ class scrambledGame {
     if (this.word === this.userInput.value.toLowerCase()) {
       this.score++;
       this.greenCheck.style.display = "block";
-      this.currentScore.innerText = `Score: ${this.score}`;
-      console.log("Correct");
-    } else {
+      this.currentScore.innerText = this.score;
+      this.userInput.value = "";
+      setTimeout(() => {
+        this.greenCheck.style.display = "none";
+      }, 1000);
+      // this.nextScrambledWord();
+      return true;
+    } else if (this.word !== this.userInput.value.toLowerCase()) {
       this.score -= 1;
-      console.log("Incorrect");
-      return;
+      this.redCheck.style.display = "block";
+      this.currentScore.innerText = `Score: ${this.score}`;
+      setTimeout(() => {
+        this.redCheck.style.display = "none";
+      }, 1000);
+      console.log("Incorrect Try again");
+      return false;
     }
-    this.userInput.value = "";
     // this.nextScrambledWord();
   }
   nextScrambledWord() {
     let word = this.getWord();
-    if (this.seenWords.includes(word)) {
-      return;
-    }
+    // if (this.seenWords.includes(word)) {
+    //   return;
+    // }
     this.word = word;
-    this.seenWords.push(this.word);
+    // this.seenWords.push(this.word);
     return this.scrambleWord(this.word);
+  }
+  endGame() {
+    this.gamePlay.style.display = "none";
   }
 }

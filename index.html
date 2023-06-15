@@ -31,8 +31,8 @@
               Prevent the mouse from eating the cookie by unscrambling the word
               before the timer runs out
             </small>
-            <p>Points: 0</p>
-            <p>Lives: 0</p>
+            <!-- <p>Points: 0</p>
+            <p>Lives: 0</p> -->
             <button id="start-game">Start Game</button>
             <button id="instructions">Instructions</button>
             <button id="background-loader">Reload Background</button>
@@ -45,8 +45,9 @@
               </div>
               <div class="menu">
                 <ul>
-                  <li id="difficulty"></li>
-                  <li id="score"></li>
+                  <li>Difficulty: <span id="difficulty"></span></li>
+                  <li>Score: <span id="score"></span></li>
+                  <li>Lives: <span id="lives"></span></li>
                   <li class="action">Close</li>
                   <li class="refresh-action action">Refresh</li>
                 </ul>
@@ -57,10 +58,6 @@
             </div>
 
             <div class="game-play">
-              <div class="checks">
-                <i class="material-symbols-outlined green"> check</i>
-                <i class="material-symbols-outlined red"> close</i>
-              </div>
               <div class="scrambled-word-reload">
                 <div class="scrambled-word"></div>
                 <button class="shuffle-word-button">Shuffle</button>
@@ -72,18 +69,42 @@
                   name="word-input"
                   id="word-input"
                   placeholder="unscramble word here"
+                  disabled
                 />
                 <button class="submit-word-button" disabled>Submit Word</button>
               </div>
+              <div class="timer"></div>
+              <div class="try-again">
+                <button id="again">Try Again</button>
+              </div>
+              <div class="begin">
+                <button id="begin">Begin</button>
+              </div>
+
               <!-- <div class="next-button-div">
                 <button class="next-button"">Next Word</button>
               </div> -->
+              <div class="checks">
+                <!-- <i class="material-symbols-outlined green"> check</i>
+                <i class="material-symbols-outlined red"> close</i> -->
+                <small class="green">Good Job!!</small>
+                <small class="red">Sorry! Try Again</small>
+              </div>
             </div>
             <!-- <small
               >Stuck? Take a look at the floating words in the background, you
               might find your word there. Hit refresh to see different floating
               words</small
             > -->
+            <div class="end-screen">
+              <div>
+                <h1>GAME OVER</h1>
+                <button class="restart-button">Restart</button>
+              </div>
+              <!-- <div>
+                <button id="restart-button">Restart</button>
+              </div> -->
+            </div>
           </div>
         </div>
       </main>
