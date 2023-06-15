@@ -11,6 +11,7 @@ window.onload = function () {
   let instructionsHTML = "";
   let startButton = document.getElementById("start-game");
   let gameScreen = document.querySelector(".game-screen");
+  let refreshBack = document.querySelector(".refresh-action");
 
   let easyWords = words.easyWords;
   let mediumWords = words.mediumWords;
@@ -71,6 +72,10 @@ window.onload = function () {
   createFloatingWordBackground();
 
   let backgroundButt = document.getElementById("background-loader");
+  refreshBack.addEventListener("click", function () {
+    removeBackGround();
+    createFloatingWordBackground();
+  });
   backgroundButt.addEventListener("click", function () {
     removeBackGround();
     createFloatingWordBackground();
@@ -173,4 +178,62 @@ window.onload = function () {
   }
 
   // END //
+
+  let game = new scrambledGame();
+
+  let word = game.setWord(game.getWord());
+  let scrambledWord = document.querySelector(".scrambled-word");
+  let originalWord = document.querySelector(".original-word");
+  let submitWordButton = document.querySelector(".submit-word-button");
+
+  let gameWord = game.word;
+  scrambledWord.innerText = game.scrambleWord(gameWord);
+  scrambledWord.innerText = game.scrambleWord(game.word);
+  originalWord.innerText = gameWord;
+
+  let shuffleButton = document.querySelector(".shuffle-word-button");
+
+  game.userInput.addEventListener("input", function () {
+    // Enable or disable the submit button based on input field value
+    if (game.userInput.value.length > 0) {
+      submitWordButton.disabled = false;
+    } else {
+      submitWordButton.disabled = true;
+    }
+    // submitWordButton.disabled = true;
+  });
+
+  // console.log(scrambledWord.innerText);
+  // Event Handlers
+  function shuffle() {
+    const shuffledChars = scrambledWord.innerText
+      .split("")
+      .sort(() => 0.5 - Math.random());
+    // console.log(shuffledChars.join(""));
+    return shuffledChars.join("");
+  }
+  shuffleButton.addEventListener("click", function () {
+    scrambledWord.innerHTML = shuffle();
+  });
+
+  // console.log(game.this.word);
+  console.log(scrambledWord);
+  console.log(scrambledWord.innerHTML);
+  console.log("this.word:", gameWord);
+  // console.log(originalWord.innerText);
+  // console.log(game.originalWord);
+  // let sWord = game.scrambleWord();
+  // console.log(game);
+  // console.log("Scrambled:", sWord);
+
+  submitWordButton.addEventListener("onchange", function (event) {
+    submitWordButton.disabled = false;
+  });
+  submitWordButton.addEventListener("click", function () {
+    game.compareWords();
+    submitWordButton.disabled = true;
+    scrambledWord.innerText = game.nextScrambledWord();
+  });
+
+  // console.log(game.nextScrambledWord());
 };

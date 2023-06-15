@@ -11,6 +11,10 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat&family=Tilt+Prism&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
     <title>Scrambled Words</title>
   </head>
   <body>
@@ -35,16 +39,56 @@
           </div>
 
           <div class="game-screen">
-            <p class="score">50</p>
-            <p class="difficulty">Hard</p>
-            <div id="scrambled-word">
-              <p>Word</p>
-              <input type="text" name="" id="" />
+            <nav class="top-nav">
+              <div class="logo">
+                <h5>Scrambled Words</h5>
+              </div>
+              <div class="menu">
+                <ul>
+                  <li id="difficulty"></li>
+                  <li id="score"></li>
+                  <li class="action">Close</li>
+                  <li class="refresh-action action">Refresh</li>
+                </ul>
+              </div>
+            </nav>
+            <div class="hr">
+              <hr class="nav-hr" />
             </div>
+
+            <div class="game-play">
+              <div class="checks">
+                <i class="material-symbols-outlined green"> check</i>
+                <i class="material-symbols-outlined red"> close</i>
+              </div>
+              <div class="scrambled-word-reload">
+                <div class="scrambled-word"></div>
+                <button class="shuffle-word-button">Shuffle</button>
+              </div>
+              <div class="original-word"></div>
+              <div id="text-input">
+                <input
+                  type="text"
+                  name="word-input"
+                  id="word-input"
+                  placeholder="unscramble word here"
+                />
+                <button class="submit-word-button" disabled>Submit Word</button>
+              </div>
+              <!-- <div class="next-button-div">
+                <button class="next-button"">Next Word</button>
+              </div> -->
+            </div>
+            <!-- <small
+              >Stuck? Take a look at the floating words in the background, you
+              might find your word there. Hit refresh to see different floating
+              words</small
+            > -->
           </div>
         </div>
       </main>
     </div>
+    <script src="js/game.js"></script>
     <script src="js/words.js"></script>
     <script src="js/index.js"></script>
   </body>

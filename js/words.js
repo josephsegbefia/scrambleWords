@@ -25,7 +25,6 @@ class Words {
       "van",
       "whale",
       "xylophone",
-      "yo-yo",
       "zoo",
       "ant",
       "bee",
