@@ -9,7 +9,7 @@ window.onload = function () {
   const splashScreen = document.querySelector(".splash-screen");
   const content = document.querySelector(".content");
   let instructionsHTML = "";
-  let endScreen = "";
+  // let endScreen = "";
   let startButton = document.getElementById("start-game");
   let gameScreen = document.querySelector(".game-screen");
   let refreshBack = document.querySelector(".refresh-action");
@@ -72,15 +72,15 @@ window.onload = function () {
 
   createFloatingWordBackground();
 
-  let backgroundButt = document.getElementById("background-loader");
+  // let backgroundButt = document.getElementById("background-loader");
   refreshBack.addEventListener("click", function () {
     removeBackGround();
     createFloatingWordBackground();
   });
-  backgroundButt.addEventListener("click", function () {
-    removeBackGround();
-    createFloatingWordBackground();
-  });
+  // backgroundButt.addEventListener("click", function () {
+  //   removeBackGround();
+  //   createFloatingWordBackground();
+  // });
 
   // END FLOATING WORDS BACKGROUND //
 
@@ -186,16 +186,20 @@ window.onload = function () {
   let scrambledWord = document.querySelector(".scrambled-word");
   let originalWord = document.querySelector(".original-word");
   let submitWordButton = document.querySelector(".submit-word-button");
-  let gameLives = document.getElementById("lives");
+  let livesSpan = document.getElementById("lives");
   let tryAgainButton = document.getElementById("again");
   let gameWord = game.word;
   let beginButton = document.getElementById("begin");
   let inputArea = document.getElementById("word-input");
   scrambledWord.innerText = game.scrambleWord(gameWord);
   scrambledWord.innerText = game.scrambleWord(game.word);
+  let difficulty = document.getElementById("difficulty");
+  let currentLives = parseInt(livesSpan.innerText);
+
+  difficulty.innerText = game.difficulty;
   originalWord.innerText = gameWord;
 
-  gameLives.innerText = game.lives;
+  // gameLives.innerText = game.lives;
 
   let shuffleButton = document.querySelector(".shuffle-word-button");
 
@@ -226,77 +230,14 @@ window.onload = function () {
   console.log(scrambledWord);
   console.log(scrambledWord.innerHTML);
   console.log("this.word:", gameWord);
-  // console.log(originalWord.innerText);
-  // console.log(game.originalWord);
-  // let sWord = game.scrambleWord();
-  // console.log(game);
-  // console.log("Scrambled:", sWord);
-
-  // submitWordButton.addEventListener("onchange", function (event) {
-  //   submitWordButton.disabled = false;
-  // });
-  // submitWordButton.addEventListener("click", function () {
-  //   game.compareWords();
-  //   submitWordButton.disabled = true;
-  //   scrambledWord.innerText = game.nextScrambledWord();
-  // });
-
-  // TIMER START //
-  // Set the countdown duration in milliseconds
-  let countdownDuration;
-
-  // Get the current timestamp
-  const startTime = new Date().getTime();
-
-  // Update the countdown every second
-  let intervalId;
-  function startTimer() {
-    countdownDuration = 0.75 * 60 * 1000;
-    intervalId = setInterval(function () {
-      // Get the current timestamp
-      const currentTime = new Date().getTime();
-
-      // Calculate the elapsed time in milliseconds
-      const elapsedTime = currentTime - startTime;
-
-      // Calculate the remaining time in milliseconds
-      const remainingTime = countdownDuration - elapsedTime;
-
-      // Check if the countdown has finished
-      if (remainingTime <= 0) {
-        clearInterval(intervalId);
-        document.querySelector(".timer").innerHTML = "Time Up! You lost 1 life";
-        inputArea.disabled = true;
-        gameLives.innerText -= 1;
-        tryAgainButton.style.display = "block";
-
-        return;
-      }
-
-      // Convert remaining time to minutes and seconds
-      const minutes = Math.floor(
-        (remainingTime % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-
-      // Display the countdown in the HTML element
-      const countdownElement = document.querySelector(".timer");
-      countdownElement.innerHTML = `Time remaining: ${minutes}m ${seconds}s`;
-    }, 1000);
-  }
-
-  function tryAgain() {
-    startTimer();
-  }
 
   submitWordButton.addEventListener("click", function () {
     if (game.compareWords()) {
       submitWordButton.disabled = true;
       scrambledWord.innerText = game.nextScrambledWord();
       setTimeout(() => {
-        clearInterval(intervalId);
-        startTimer();
-      }, 1000);
+        game.restartTimer();
+      }, 100);
       console.log("Correct");
     } else {
       console.log("Wrong, try again!!");
@@ -307,13 +248,29 @@ window.onload = function () {
     game.endGame();
   }
 
+  // if (game.startTimer() === 0) {
+  //   tryAgainButton.style.display = "block";
+  // }
   beginButton.addEventListener("click", function () {
     beginButton.style.display = "none";
     inputArea.disabled = false;
 
-    startTimer();
+    game.startTimer();
   });
 
-  // startTimer();
-  // TIMER END //
+  tryAgainButton.addEventListener("click", function () {
+    tryAgainButton.style.display = "none";
+    inputArea.disabled = false;
+    // let currentLives = parseInt(livesSpan.innerText);
+    currentLives -= 1;
+    livesSpan.innerText = currentLives;
+
+    game.startTimer();
+    if (currentLives === 0) {
+      this.endGame();
+    }
+  });
+
+  let gamePlay = document.querySelector(".game-play");
+  let endScreen = document.querySelector(".end-screen");
 };

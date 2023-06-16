@@ -335,10 +335,11 @@ li {
   margin-top: 20px;
 }
 .try-again {
-  display: none;
+  display: flex;
   justify-content: center;
 }
 #again {
+  display: none;
   background-color: red;
   color: white;
   padding: 10px;
@@ -346,7 +347,11 @@ li {
   border: none;
   border-radius: 5px;
 }
-
+#again:hover {
+  background-color: white;
+  color: red;
+  border: 1px solid red;
+}
 .begin {
   display: flex;
   justify-content: center;

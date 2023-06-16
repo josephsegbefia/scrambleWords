@@ -2,11 +2,10 @@ class scrambledGame {
   constructor() {
     this.word = "";
     this.userInput = document.getElementById("word-input");
-    this.livesLeft = 5;
     this.difficulty = "Easy";
-    this.value = this.difficulty;
-    this.score = 0;
-    this.lives = 5;
+    // this.value = this.difficulty;
+    this.score = document.getElementById("score").innerText;
+    this.lives = document.getElementById("lives").innerText;
     this.hint = "Some Hint";
     this.gameIsOver = false;
     this.words = new Words();
@@ -19,17 +18,12 @@ class scrambledGame {
     this.endScreen = document.getElementById("end-screen");
     this.seenWords = [];
     this.gamePlay = document.querySelector(".game-play");
-    // this.originalWord = document.querySelector(".original-word");
-    // this.easyWord = this.getEasyWord;
-    // this.hardWord = this.gethHardWord;
-    // this.mediumWord = this.getMediumWord;
+    this.countDownDuration = null;
+    this.intervalID = null;
+    this.startTime = new Date().getTime();
+    this.tryAgainButton = document.getElementById("again");
   }
-  // getEasyWord() {
-  //   let word = "";
-  //   if (this.difficulty === "Easy") {
-  //   }
-  //   return word;
-  // }
+
   getWord() {
     let word = "";
     if (this.difficulty === "Medium") {
@@ -85,14 +79,44 @@ class scrambledGame {
   }
   nextScrambledWord() {
     let word = this.getWord();
-    // if (this.seenWords.includes(word)) {
-    //   return;
-    // }
     this.word = word;
-    // this.seenWords.push(this.word);
     return this.scrambleWord(this.word);
   }
   endGame() {
     this.gamePlay.style.display = "none";
+    this.endScreen.style.display = "block";
+  }
+  startTimer() {
+    this.countDownDuration = 0.75 * 60 * 1000;
+    this.startTime = new Date().getTime(); // Update the start time
+
+    this.intervalId = setInterval(() => {
+      const currentTime = new Date().getTime();
+      const elapsedTime = currentTime - this.startTime;
+      const remainingTime = this.countDownDuration - elapsedTime;
+
+      if (remainingTime <= 0) {
+        clearInterval(this.intervalId);
+        document.querySelector(".timer").innerHTML = "Time Up!";
+        this.userInput.disabled = true;
+        this.tryAgainButton.style.display = "block";
+        // this.lives = this.lives - 1;
+        return;
+      }
+
+      const minutes = Math.floor(
+        (remainingTime % (1000 * 60 * 60)) / (1000 * 60)
+      );
+      const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+
+      const countdownElement = document.querySelector(".timer");
+      countdownElement.innerHTML = `Time remaining: ${minutes}m ${seconds}s`;
+    }, 1000);
+    return;
+  }
+
+  restartTimer() {
+    clearInterval(this.intervalID);
+    this.startTimer();
   }
 }
