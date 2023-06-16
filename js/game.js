@@ -47,11 +47,7 @@ class scrambledGame {
     this.word = word;
   }
   scrambleWord(word) {
-    // let word = this.getWord();
-    // let word = this.word;
-    // const shuffledChars = this.word.split("").sort(() => 0.5 - Math.random());
     const shuffledChars = word.split("").sort(() => 0.5 - Math.random());
-    // console.log(shuffledChars.join(""));
     return shuffledChars.join("");
   }
   compareWords() {
@@ -63,7 +59,6 @@ class scrambledGame {
       setTimeout(() => {
         this.greenCheck.style.display = "none";
       }, 1000);
-      // this.nextScrambledWord();
       return true;
     } else if (this.word !== this.userInput.value.toLowerCase()) {
       this.score -= 1;
@@ -75,7 +70,6 @@ class scrambledGame {
       console.log("Incorrect Try again");
       return false;
     }
-    // this.nextScrambledWord();
   }
   nextScrambledWord() {
     let word = this.getWord();
@@ -88,7 +82,7 @@ class scrambledGame {
   }
   startTimer() {
     this.countDownDuration = 0.75 * 60 * 1000;
-    this.startTime = new Date().getTime(); // Update the start time
+    this.startTime = new Date().getTime();
 
     this.intervalId = setInterval(() => {
       const currentTime = new Date().getTime();
@@ -100,7 +94,6 @@ class scrambledGame {
         document.querySelector(".timer").innerHTML = "Time Up!";
         this.userInput.disabled = true;
         this.tryAgainButton.style.display = "block";
-        // this.lives = this.lives - 1;
         return;
       }
 

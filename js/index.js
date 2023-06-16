@@ -126,13 +126,6 @@ window.onload = function () {
   startButton.addEventListener("click", function () {
     showStart();
   });
-  // let backButton = document.getElementById("back");
-  // function revertHTML() {
-  //   content.innerHTML = splashContent;
-  // }
-  // backButton.addEventListener("click", function () {
-  //   revertHTML();
-  // });
 
   function scramble() {
     const splashHeader = document.getElementById("splash-header");
@@ -198,8 +191,6 @@ window.onload = function () {
 
   difficulty.innerText = game.difficulty;
   originalWord.innerText = gameWord;
-
-  // gameLives.innerText = game.lives;
 
   let shuffleButton = document.querySelector(".shuffle-word-button");
 
