@@ -43,6 +43,8 @@ If you want to customize the game, you can modify the following variables in the
 - CSS
 - JavaScript
 
+Play Game Here: https://josephsegbefia.github.io/scrambleWords/
+
 Credits
 This game was developed by Joseph Segbefia as a project or assignment at IronHack Berlin.
 
