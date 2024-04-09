@@ -1,6 +1,6 @@
 ### Scrambled Words Game
 
-Welcome to the Scrambled Words Game! This is a JavaScript game where players need to unscramble words within a given time limit to prevent a cat from eating a mouse. The game features a floating word background, word scrambling and unscrambling functionality, and a timer to add excitement to the gameplay.
+Welcome to the Scrambled Words Game! This is a JavaScript game where players need to unscramble words within a given time limit. The game features a floating word background, word scrambling and unscrambling functionality, and a timer to add excitement to the gameplay.
 
 #### Game Instructions
 
